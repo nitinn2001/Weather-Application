@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=1, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./home.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;0,700;0,800;1,300;1,500;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="text/JavaScript"
+      src=" https://MomentJS.com/downloads/moment.js"
+    ></script>
+    <title>Weather App</title>
+  </head>
+  <body class="bgcolor w-100 min-vh-100">
+    <div class="row g-0">
+      <div class="col-12 col-sm-3 p-4 left-bg">
+        <div style="min-height: 550px" class="bg-white rounded-start shadow-sm">
+          <div class="position-relative">
+            <input
+              class="rounded rounded-pill w-100 border border-1 p-1 search-bar"
+              id="search-input"
+              spellcheck="false"
+              placeholder="Search City "
+              style="text-indent: 25px"
+              onclick="search()"
+            />
+            <i
+              class="bi bi-search position-absolute text-muted top-0 start-0 mt-1 ms-2 text-center"
+            ></i>
+
+            <div
+              style="max-height: 150px"
+              class="position-absolute z-3 w-100 border border-1 rounded rounded-2 bg-white p-2 overflow-y-scroll forecast autocomplete d-none"
+              id="populate"
+            >
+              <div class="d-grid border-bottom py-1">
+                <span class="fs-low"> salem </span>
+                <span class="base-text">india</span>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column-reverse py-3 flex-sm-column">
+            <div class="weather-icon">
+              <img
+                id="weathericon"
+                src="./images/leftside/partly-cloudy-day.svg"
+                alt=""
+                style="max-width: 200px"
+              />
+            </div>
+            <div class="temperature">
+              <h6 id="temp">0</h6>
+              <span class="temp-unit">°C</span>
+            </div>
+            <div class="loc">
+              <h4 class="fw-bold" id="loc"></h4>
+            </div>
+            <div class="date-time highlight-text">
+              <p id="date-time">Monday, <span class="time">12:00</span></p>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="condition-rain">
+            <div class="d-flex align-items-center flex-wrap condition">
+              <img
+                width="60px"
+                src="./images/static/cloudy.svg"
+                alt=""
+                class="cloud"
+                id="cloudy"
+              />
+              <p id="condition">Most Cloudly</p>
+            </div>
+            <div class="d-flex align-items-center flex-wrap rain">
+              <img src="./images/rightside/rain.svg" width="60px" alt="" />
+              <p>Rain Percentage <span id="rain">0</span>%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-9 p-4 rounded-end right-bg">
+        <h4 class="mb-4 fw-bold">Week</h4>
+        <div class="week py-1" id="card">
+          <div class="card">
+            <div class="card-header border border-0 bg-white">Sun</div>
+            <div class="card-body h-30">
+              <img src="./images/static/cloudy-day-1.svg" alt="" />
+            </div>
+            <div class="card-footer border border-0 bg-white">
+              15<span>°</span>
+            </div>
+          </div>
+        </div>
+        <h4 class="mt-5 fw-bold">Today's Highlights</h4>
+        <div>
+          <div class="row p-2">
+            <div class="col mt-2">
+              <div class="card">
+                <div
+                  class="card-header border border-0 bg-white highlight-text"
+                >
+                  Pressure
+                </div>
+                <div class="card-body d-flex align-items-center mb-4">
+                  <img
+                    src="./images/rightside/pressure.svg"
+                    style="width: 4rem"
+                    alt=""
+                  />
+                  <h1 class="fw-bold p-1" id="pressure">720</h1>
+                  <span>hpa</span>
+                </div>
+                <div class="card-footer border border-0 bg-white"></div>
+              </div>
+            </div>
+            <div class="col mt-2">
+              <div class="card">
+                <div
+                  class="card-header border border-0 bg-white highlight-text"
+                >
+                  Wind Status
+                </div>
+                <div class="card-body d-flex align-items-center">
+                  <img
+                    src="./images/rightside/windsock.svg"
+                    width="60px"
+                    alt=""
+                  />
+                  <h1 class="fw-bold px-2" id="wind">7.70</h1>
+                  <span>km/h</span>
+                </div>
+                <div
+                  class="card-footer border border-0 bg-white d-flex align-items-center"
+                >
+                  <img
+                    src="./images/rightside/compass.svg"
+                    style="width: 2rem"
+                    alt=""
+                  />
+                  <h6>WSW</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col mt-2">
+              <div class="card p-2">
+                <div
+                  class="card-header border border-0 bg-white highlight-text"
+                >
+                  Sunrise & Sunset
+                </div>
+                <div
+                  class="card-body d-flex align-items-center justify-content-between mb-0"
+                >
+                  <div>
+                    <img
+                      src="./images/rightside/sunrise.svg"
+                      width="60px"
+                      alt=""
+                    />
+                    <h6 class="fw-bold" id="sunrise">6:35 AM</h6>
+                  </div>
+                  <div>
+                    <img
+                      src="./images/rightside/sunset.svg"
+                      width="60px"
+                      alt=""
+                    />
+                    <h6 class="fw-bold" id="sunset">5:35 PM</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row p-2">
+            <div class="col mt-2">
+              <div class="card">
+                <div
+                  class="card-header border border-0 bg-white highlight-text"
+                >
+                  Humidity
+                </div>
+                <div class="card-body d-flex align-items-center">
+                  <img
+                    src="./images/rightside/humidity.svg"
+                    width="60px"
+                    alt=""
+                  />
+                  <h1 class="fw-bold ps-3" id="Humidity">12</h1>
+                  <span>%</span>
+                </div>
+                <div class="card-footer border border-0 bg-white"></div>
+              </div>
+            </div>
+            <div class="col mt-2">
+              <div class="card">
+                <div
+                  class="card-header border border-0 bg-white highlight-text"
+                >
+                  Visibility
+                </div>
+                <div class="card-body d-flex align-items-center">
+                  <img
+                    src="./images/rightside/clear-day.svg"
+                    width="60px"
+                    alt=""
+                  />
+                  <h1 class="fw-bold px-1" id="Visibility">5.2</h1>
+                  <span>km</span>
+                </div>
+                <div class="card-footer border border-0 bg-white"></div>
+              </div>
+            </div>
+            <div class="col mt-2">
+              <div class="card">
+                <div
+                  class="card-header border border-0 bg-white highlight-text"
+                >
+                  Air Quality
+                </div>
+                <div class="card-body d-flex align-item-center">
+                  <img
+                    src="./images/rightside/dust-wind.svg"
+                    width="60px"
+                    alt=""
+                  />
+                  <h1 class="fw-bold px-2" id="airquality">105</h1>
+                </div>
+                <div class="card-footer border border-0 bg-white"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./javascript.js"></script>
+  </body>
+</html>
